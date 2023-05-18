@@ -8,9 +8,8 @@ RUN locale-gen zh_CN.utf8
 
 ##将当前文件夹下面的requirements.txt复制到容器中
 
-COPY ./requirements.txt /requirements.txt   # python依赖
+COPY ./requirements.txt /requirements.txt
 
-## 安装依赖
 RUN pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
 
 ##根目录为工作目录
@@ -20,9 +19,8 @@ WORKDIR /api
 ENV PATH=$PATH:/api
 ENV PYTHONPATH /api
 ########################
-#
 ##将当前目录下的文件拷贝至容器根目录
-#
+
 COPY . .
 ##执行命令
 #
