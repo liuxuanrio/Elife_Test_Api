@@ -34,6 +34,6 @@ def gmailroute():
 
 
 if __name__ == '__main__':
-    api.run(port=8989, debug=True, host='18.222.127.214')  # 启动服务
-    server = pywsgi.WSGIServer(('18.222.127.214', 8989), api)
+    api.run(port=8989, debug=True, host='127.0.0.1')  # 启动服务
+    server = pywsgi.WSGIServer(('127.0.0.1', 8989), api)
     server.serve_forever()
