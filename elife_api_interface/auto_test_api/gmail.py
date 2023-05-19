@@ -60,7 +60,7 @@ class Gmail:
                                 if type == 1:
                                     data = self.openEmail(body, type)
                                 else:
-                                    data = body
+                                    data = str(body)
                                     break
                                 if data == "False":
                                     pass
