@@ -1,3 +1,6 @@
+import traceback
+
+
 class Gmail:
     def openEmail(self, body):
         import tempfile
@@ -76,6 +79,7 @@ class Gmail:
             return data
 
         except:
+            print(traceback.print_exc())
             return "False"
 
 if __name__ == "__main__":
