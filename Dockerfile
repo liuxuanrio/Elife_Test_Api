@@ -13,11 +13,11 @@ COPY ./requirements.txt /requirements.txt
 RUN pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
 
 ##根目录为工作目录
-WORKDIR /api
+WORKDIR /app
 
 #########################
-ENV PATH=$PATH:/api
-ENV PYTHONPATH /api
+ENV PATH=$PATH:/app
+ENV PYTHONPATH /app
 ########################
 ##将当前目录下的文件拷贝至容器根目录
 
