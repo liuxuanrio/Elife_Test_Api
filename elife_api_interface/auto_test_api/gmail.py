@@ -1,22 +1,19 @@
 class Gmail:
     def openEmail(self, body, type):
         import tempfile
-        if type == 1:
-            fp = tempfile.TemporaryFile()  # 创建临时文件
-            fp.write(body.encode('utf-8'))
-            fp.seek(0)
-            data = str(fp.readline())[2: -5]
-            if data.isdigit():  # 判断字符串中是否存在字母，长度大于15
-                pass
-            else:
-                fp.readline()
-                data = str(fp.readline())[2: -5]
-            if data.isdigit():  # 判断字符串中是否存在字母，长度大于15
-                pass
-            else:
-                data = "False"
+        fp = tempfile.TemporaryFile()  # 创建临时文件
+        fp.write(body.encode('utf-8'))
+        fp.seek(0)
+        data = str(fp.readline())[2: -5]
+        if data.isdigit():  # 判断字符串中是否存在字母，长度大于15
+            pass
         else:
-            data = body
+            fp.readline()
+            data = str(fp.readline())[2: -5]
+        if data.isdigit():  # 判断字符串中是否存在字母，长度大于15
+            pass
+        else:
+            data = "False"
         return data
 
     def selectGmail(self, type):
@@ -60,7 +57,11 @@ class Gmail:
                                 pass
 
                             if content_type == "text/plain" and "attachment" not in content_disposition:
-                                data = self.openEmail(body, type)
+                                if type == 1:
+                                    data = self.openEmail(body, type)
+                                else:
+                                    data = body
+                                    break
                                 if data == "False":
                                     pass
                                 else:
