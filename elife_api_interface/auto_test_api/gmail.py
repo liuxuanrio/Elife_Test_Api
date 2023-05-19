@@ -60,7 +60,7 @@ class Gmail:
                             if content_type == "text/plain" and "attachment" not in content_disposition:
                                 if int(type) == 1:
                                     print(data)
-                                    data = self.openEmail(body, type)
+                                    data = self.openEmail(body)
                                 else:
                                     data = str(body)
                                     break
