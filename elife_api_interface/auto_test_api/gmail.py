@@ -1,5 +1,5 @@
 class Gmail:
-    def openEmail(self, body, type):
+    def openEmail(self, body):
         import tempfile
         fp = tempfile.TemporaryFile()  # 创建临时文件
         fp.write(body.encode('utf-8'))
