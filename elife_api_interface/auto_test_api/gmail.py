@@ -26,8 +26,6 @@ class Gmail:
             import tempfile
             import time
             time.sleep(2)
-            import socket
-            import socks
 
             imap = imaplib.IMAP4_SSL("imap.gmail.com")  # establish connection
 
