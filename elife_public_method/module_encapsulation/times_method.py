@@ -125,6 +125,15 @@ class TimeMethod:
         userid = BasicsOperation().regularstrint(time)[2:]
         return userid
 
+    # 时间加*小时
+    def dayTimeUpate(self, eta_temp, sum):
+        import datetime
+        fd = datetime.datetime.strptime(eta_temp, "%Y-%m-%d %H:%M:%S")
+        # 加8后的时间
+        eta = (fd + datetime.timedelta(hours=sum)).strftime("%Y-%m-%d %H:%M:%S")
+        return eta
+
+
 
 
 if __name__ == "__main__":
