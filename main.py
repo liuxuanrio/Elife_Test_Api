@@ -32,6 +32,17 @@ def gmailroute():
         ret = returndata(2, "")  # 打印报错信息
     return json.dumps(ret, ensure_ascii=False)
 
+@api.route('/auto/ctriproute', methods=['post'])  # 创建测试套
+def ctriproute():
+    keylist = ["ctripType","body","urlstr"]
+    msginfo = tokenpublic(keylist)
+    try:
+        ret = Gmail().selectGmail(msginfo["gmailType"])
+        ret = returndata(1, ret)
+    except:
+        ret = returndata(2, "")  # 打印报错信息
+    return json.dumps(ret, ensure_ascii=False)
+
 
 if __name__ == '__main__':
     api.run(port=8090, debug=True, host='127.0.0.1')  # 启动服务
