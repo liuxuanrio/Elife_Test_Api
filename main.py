@@ -21,7 +21,7 @@ def tokenpublic(keylist):
     return ren
 
 
-@api.route('/auto/gmail', methods=['post'])  # 创建测试套
+@api.route('/auto/gmail', methods=['post'])  # 获取gmail邮箱
 def gmailroute():
     keylist = ["gmailType"]
     msginfo = tokenpublic(keylist)
