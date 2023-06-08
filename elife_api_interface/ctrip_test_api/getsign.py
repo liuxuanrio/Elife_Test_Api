@@ -2,7 +2,6 @@ import binascii
 import json
 import hashlib
 import requests
-import sys
 from pyDes import des, PAD_PKCS5
 from pyDes import ECB
 
@@ -38,13 +37,8 @@ def ctrip_request(body,urlstr):
     time_stamp = '23842834'
     secrect_key = '12345678'
     encry_s, sign = get_sign(vendor_id,version,channel,time_stamp,secrect_key,bodyJson=body)
-    # "https://60pfokvaff.execute-api.us-east-2.amazonaws.com/dev/{}/ordercreate/{}/{}/{}"
     url = urlstr.format(channel, version, time_stamp, sign)
     ret = requests.post(url=url, data=encry_s.upper())
-    # print(url)
-    # ret2=ret.json()
-    # ret3 = json.dumps(ret2, ensure_ascii=False)
-    # ret4 = ret.replace("'", "", -1)
     print(ret.json())
     return ret.json()
 

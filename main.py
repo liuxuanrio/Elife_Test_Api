@@ -5,6 +5,7 @@ from gevent import pywsgi
 from flask import request, Flask, render_template, send_from_directory, make_response
 
 from elife_api_interface.auto_test_api.gmail import Gmail
+from elife_api_interface.ctrip_test_api.getsign import ctrip_request
 from elife_public_method.module_encapsulation.parameter_method import returndata
 
 # 实例化api，把当前这个python文件当作一个服务，__name__代表当前这个python文件
@@ -34,10 +35,10 @@ def gmailroute():
 
 @api.route('/auto/ctriproute', methods=['post'])  # 创建测试套
 def ctriproute():
-    keylist = ["ctripType","body","urlstr"]
+    keylist = ["body", "urlstr"]
     msginfo = tokenpublic(keylist)
     try:
-        ret = Gmail().selectGmail(msginfo["gmailType"])
+        ret = ctrip_request(msginfo["body"], msginfo["urlstr"])
         ret = returndata(1, ret)
     except:
         ret = returndata(2, "")  # 打印报错信息
