@@ -22,18 +22,26 @@ def tokenpublic(keylist):
     return ren
 
 
-@api.route('/auto/gmail', methods=['post'])  # 获取gmail邮箱
+@api.route('/auto/gmail', methods=['GET', 'POST'])  # 获取gmail邮箱
 def gmailroute():
-    keylist = ["gmailType"]
-    msginfo = tokenpublic(keylist)
-    try:
-        ret = Gmail().selectGmail(msginfo["gmailType"])
-        ret = returndata(1, ret)
-    except:
-        ret = returndata(2, "")  # 打印报错信息
+    if (request.method == 'GET'):
+        try:
+            ret = Gmail().selectGmail(1)
+            ret = returndata(1, ret)
+        except:
+            ret = returndata(2, "")  # 打印报错信息
+    else:
+        keylist = ["gmailType"]
+        msginfo = tokenpublic(keylist)
+        try:
+            ret = Gmail().selectGmail(msginfo["gmailType"])
+            ret = returndata(1, ret)
+        except:
+            ret = returndata(2, "")  # 打印报错信息
     return json.dumps(ret, ensure_ascii=False)
 
-@api.route('/auto/ctriproute', methods=['post'])  # 创建测试套
+
+@api.route('/auto/ctriproute', methods=['post'])
 def ctriproute():
     keylist = ["body", "urlstr"]
     msginfo = tokenpublic(keylist)
