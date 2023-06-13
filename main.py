@@ -7,6 +7,7 @@ from flask import request, Flask, render_template, send_from_directory, make_res
 from elife_api_interface.auto_test_api.gmail import Gmail
 from elife_api_interface.ctrip_test_api.getsign import ctrip_request
 from elife_public_method.module_encapsulation.parameter_method import returndata
+from elife_api_interface.ctrip_test_api.ctripday import ctrip_day_request
 
 # 实例化api，把当前这个python文件当作一个服务，__name__代表当前这个python文件
 api = Flask(__name__)
@@ -47,6 +48,18 @@ def ctriproute():
     msginfo = tokenpublic(keylist)
     try:
         ret = ctrip_request(msginfo["body"], msginfo["urlstr"])
+        ret = returndata(1, ret)
+    except:
+        ret = returndata(2, "")  # 打印报错信息
+    return json.dumps(ret, ensure_ascii=False)
+
+#  ctrip多日程
+@api.route('/auto/ctripday', methods=['post'])
+def ctripday():
+    keylist = ["body", "urlstr"]
+    msginfo = tokenpublic(keylist)
+    try:
+        ret = ctrip_day_request(msginfo["body"], msginfo["urlstr"])
         ret = returndata(1, ret)
     except:
         ret = returndata(2, "")  # 打印报错信息
