@@ -17,3 +17,4 @@ urllib3==1.25.8
 Werkzeug==2.3.4
 zope.event==4.6
 zope.interface==6.0
+pytz==2023.3
