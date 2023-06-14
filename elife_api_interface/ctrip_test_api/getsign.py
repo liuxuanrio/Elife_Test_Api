@@ -45,6 +45,7 @@
 import json
 import hashlib
 import binascii
+
 try:
     from pyDes import des, PAD_PKCS5, ECB
 except ImportError:
@@ -178,20 +179,25 @@ def ctripMd5(version, channel, timestamp, bodyLenth, signStr):
 # }
 
 def ctrip_request(data,urlstr):
-
-    dec = CDes(get_ctrip_secrect_key())
-    enData = dec.encrypt(data)
-    timeStamp = get_shanghai_time()
-    url_info = get_ctrip_url_info()
-    signStr = ctripMd5Str(timeStamp, len(enData))
-    url = urlstr.format(timeStamp, signStr)
-    print(signStr)
-    print(enData)
-    print(timeStamp)
-    response = requests.post(url, data=enData)
-
-    print(response.status_code)
-    print(response.json())
+    try:
+        dec = CDes(get_ctrip_secrect_key())
+        enData = dec.encrypt(data)
+        timeStamp = get_shanghai_time()
+        url_info = get_ctrip_url_info()
+        signStr = ctripMd5Str(timeStamp, len(enData))
+        url = urlstr.format(timeStamp, signStr)
+        print(signStr)
+        print(enData)
+        print(timeStamp)
+        response = requests.post(url, data=enData)
+        print(response.status_code)
+        print(response.json())
+        dataJson = response.json()
+    except:
+        import traceback
+        dataJson = str(traceback.print_exc())
+        print(dataJson)
+    return dataJson
 
 
 # url = f'https://60pfokvaff.execute-api.us-east-2.amazonaws.com/dev/day/estimateprice/3.0/{timeStamp}/{signStr}'

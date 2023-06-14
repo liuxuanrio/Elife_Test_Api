@@ -78,15 +78,21 @@ def ctripMd5(version, channel, timestamp, bodyLenth, signStr):
 # url = f'https://60pfokvaff.execute-api.us-east-2.amazonaws.com/dev/day/cancelorder/3.0/{timeStamp}/{signStr}'
 # url = f'https://60pfokvaff.execute-api.us-east-2.amazonaws.com/dev/day/updateorder/3.0/{timeStamp}/{signStr}'
 def ctrip_day_request(data,urlstr):
-    dec = CDes(get_ctrip_secrect_key())
-    enData = dec.encrypt(data)
-    timeStamp = get_shanghai_time()
-    url_info = get_ctrip_url_info()
-    signStr = ctripMd5Str(timeStamp, len(enData))
-    url = urlstr.format(timeStamp, signStr)
-    # url = f'https://60pfokvaff.execute-api.us-east-2.amazonaws.com/dev/day/createorder/3.0/{}/{}'
-    response = requests.post(url, data=enData)
-    return response.json()
+    try:
+        dec = CDes(get_ctrip_secrect_key())
+        enData = dec.encrypt(data)
+        timeStamp = get_shanghai_time()
+        url_info = get_ctrip_url_info()
+        signStr = ctripMd5Str(timeStamp, len(enData))
+        url = urlstr.format(timeStamp, signStr)
+        # url = f'https://60pfokvaff.execute-api.us-east-2.amazonaws.com/dev/day/createorder/3.0/{}/{}'
+        response = requests.post(url, data=enData)
+        dataJson = response.json()
+    except:
+        import traceback
+        dataJson = str(traceback.print_exc())
+        print(dataJson)
+    return dataJson
 
 
     # print(response.status_code)

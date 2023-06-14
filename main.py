@@ -8,6 +8,7 @@ from elife_api_interface.auto_test_api.gmail import Gmail
 from elife_api_interface.ctrip_test_api.getsign import ctrip_request
 from elife_public_method.module_encapsulation.parameter_method import returndata
 from elife_api_interface.ctrip_test_api.ctripday import ctrip_day_request
+from elife_public_method.module_encapsulation.times_method import TimeMethod
 
 # 实例化api，把当前这个python文件当作一个服务，__name__代表当前这个python文件
 api = Flask(__name__)
@@ -39,6 +40,7 @@ def gmailroute():
             ret = returndata(1, ret)
         except:
             ret = returndata(2, "")  # 打印报错信息
+    TimeMethod().logstimeinfo(ret)
     return json.dumps(ret, ensure_ascii=False)
 
 
@@ -51,6 +53,7 @@ def ctriproute():
         ret = returndata(1, ret)
     except:
         ret = returndata(2, "")  # 打印报错信息
+    TimeMethod().logstimeinfo(ret)
     return json.dumps(ret, ensure_ascii=False)
 
 #  ctrip多日程
@@ -63,6 +66,7 @@ def ctripday():
         ret = returndata(1, ret)
     except:
         ret = returndata(2, "")  # 打印报错信息
+    TimeMethod().logstimeinfo(ret)
     return json.dumps(ret, ensure_ascii=False)
 
 
