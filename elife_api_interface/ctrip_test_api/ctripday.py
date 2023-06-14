@@ -73,15 +73,9 @@ def ctripMd5(version, channel, timestamp, bodyLenth, signStr):
     print("需签名串：%s, 签名后：%s, 签名串：%s" % (string, res, signStr))
     return res == signStr
 
-
-
-
 # url = f'https://60pfokvaff.execute-api.us-east-2.amazonaws.com/dev/day/estimateprice/3.0/{timeStamp}/{signStr}'
-
 # url = f'https://60pfokvaff.execute-api.us-east-2.amazonaws.com/dev/day/createorder/3.0/{timeStamp}/{signStr}'
-
 # url = f'https://60pfokvaff.execute-api.us-east-2.amazonaws.com/dev/day/cancelorder/3.0/{timeStamp}/{signStr}'
-#
 # url = f'https://60pfokvaff.execute-api.us-east-2.amazonaws.com/dev/day/updateorder/3.0/{timeStamp}/{signStr}'
 def ctrip_day_request(data,urlstr):
     dec = CDes(get_ctrip_secrect_key())
