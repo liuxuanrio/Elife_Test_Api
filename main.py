@@ -26,7 +26,7 @@ def tokenpublic(keylist):
 
 
 @api.route('/auto/AppUI/Available/Accept', methods=['post'])
-def ctriproute():
+def available_Accept():
     keylist = ["upType"]
     msginfo = tokenpublic(keylist)
     try:
