@@ -133,9 +133,19 @@ class TimeMethod:
         eta = (fd + datetime.timedelta(hours=sum)).strftime("%Y-%m-%d %H:%M:%S")
         return eta
 
+    # 计算两个时间相差多少秒
+    def countTime(self, t1, t2):
+        import time
+        t1 = time.strptime(t1, "%Y-%m-%d %H:%M:%S")
+        t2 = time.strptime(t2, "%Y-%m-%d %H:%M:%S")
+        count = time.mktime(t1) - time.mktime(t2)
+        return int(count)
+
 
 
 
 if __name__ == "__main__":
-    logs = TimeMethod().timeyearmonthday(1)
-    print(logs)
+    pass
+    # logs = TimeMethod().timeyearmonthday(1)
+    # print(logs)
+    print(TimeMethod().countTime("2023-06-21 19:58:30", "2023-06-21 19:59:00"))
