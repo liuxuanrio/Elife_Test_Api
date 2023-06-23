@@ -1,3 +1,6 @@
+from elife_app_ui_api_interface.driver_app_api.available.rides_sql import RidesSql
+
+
 class Rides:
     def available_Accept(self, uptype):
         """
@@ -11,15 +14,15 @@ class Rides:
         data = ""
         try:
             if uptype == 0:
-                pass
+                RidesSql().initialize_ride()
             elif uptype == 1:
-                pass
+                RidesSql().updateAcceptTime()
             elif uptype == 2:
-                pass
+                RidesSql().updateCountTime(0)
             elif uptype == 3:
-                pass
+                RidesSql().updateAmount()
             elif uptype == 4:
-                pass
+                RidesSql().updateCountTime(1)
             else:
                 data = "False"
         except:
