@@ -14,7 +14,7 @@ import pytz
 import requests
 
 def get_ctrip_secrect_key():
-    return '12345678'
+    return 'Xa0TTStx'
 
 def get_ctrip_vendor_id():
     return '1000777'
@@ -60,7 +60,7 @@ def ctripMd5Str(timestamp, bodyLenth):
     """
     # print(timestamp, bodyLenth)
     string = get_ctrip_vendor_id() + '3.0' + str(timestamp) + get_ctrip_secrect_key() + str(bodyLenth)
-    string = string.lower()
+    # string = string.lower()
     res = hashlib.md5(string.encode('utf-8')).hexdigest()
     return res
 
