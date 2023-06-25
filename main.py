@@ -60,26 +60,27 @@ def gmailroute():
 
 @api.route('/auto/ctriproute', methods=['post'])
 def ctriproute():
-    keylist = ["body", "urlstr"]
+    keylist = ["body", "urlstr","env"]
     msginfo = tokenpublic(keylist)
     try:
-        ret = ctrip_request(msginfo["body"], msginfo["urlstr"])
+        ret = ctrip_request(msginfo["body"], msginfo["urlstr"],msginfo["env"])
         ret = returndata(1, ret)
     except:
-        ret = returndata(2, "")  # 打印报错信息
+        ret = returndata(2, str(traceback.print_exc()))  # 打印报错信息
+
     TimeMethod().logstimeinfo(ret)
     return json.dumps(ret, ensure_ascii=False)
 
 #  ctrip多日程
 @api.route('/auto/ctripday', methods=['post'])
 def ctripday():
-    keylist = ["body", "urlstr"]
+    keylist = ["body", "urlstr","env"]
     msginfo = tokenpublic(keylist)
     try:
-        ret = ctrip_day_request(msginfo["body"], msginfo["urlstr"])
+        ret = ctrip_day_request(msginfo["body"], msginfo["urlstr"],msginfo["env"])
         ret = returndata(1, ret)
     except:
-        ret = returndata(2, "")  # 打印报错信息
+        ret = returndata(2, str(traceback.print_exc()))  # 打印报错信息
     TimeMethod().logstimeinfo(ret)
     return json.dumps(ret, ensure_ascii=False)
 

@@ -37,6 +37,7 @@ def get_shanghai_time(time_format='%Y%m%d%H%M%S'):
     now = now.replace(tzinfo=pytz.utc)
     s = now.astimezone(pytz.timezone('Asia/Shanghai')).strftime(time_format)
     return s
+    print(s)
 
 class CDes:
     """
@@ -104,6 +105,6 @@ def ctrip_day_request(data,urlstr,env):
     # print(response.json())
 if __name__ == '__main__':
     data={"ctripOrderId":"20230612164804","vehicleTypeId":121,"duration":5,"packageCode":"6-100","orderPrice":3101,"priceMark":"a8c0d389657841a98496a2612b08f4d6-v21","auditQuantity":3,"bagQuantity":4,"passenger":{"contactName":"julytest","contactPhone":"18123425634","email":"july@ttesst.dev","contactWeChat":"weixin123432"},"routeList":[{"useTime":"2025-04-30 11:30:00","departureLocation":{"name":"虹桥国际机场","latitude":31.166056,"longitude":121.319785,"cityId":2,"cityName":"上海","detailAddress":"虹桥国际机场"},"arriveLocationList":[{"name":"上海博物馆","latitude":31.128291,"longitude":121.43558,"cityId":2,"cityName":"上海","detailAddress":"黄浦区 人民大道201号"}]},{"useTime":"2025-05-01 04:10:00","departureLocation":{"name":"上海和平飯店","latitude":31.2390388,"longitude":121.4869678,"cityId":2,"cityName":"上海","detailAddress":"中國上海市黄浦区外滩南京东路20号 邮政编码: 200002"},"arriveLocationList":[{"name":"豫園","latitude":31.2253491,"longitude":121.4774603,"cityId":2,"cityName":"上海","detailAddress":"中國上海市黃浦區豫园"}]},{"useTime":"2024-05-02 15:10:00","departureLocation":{"name":"上海和平飯店","latitude":31.2390388,"longitude":121.4869678,"cityId":2,"cityName":"上海","detailAddress":"中國上海市黄浦区外滩南京东路20号 邮政编码: 200002"},"arriveLocationList":[{"name":"上海中山公園","latitude":31.2257219,"longitude":121.4239659,"cityId":2,"cityName":"上海","detailAddress":"中國上海市长宁区长宁路780号 邮政编码: 200050"}]},{"useTime":"2025-05-04 14:10:00","departureLocation":{"name":"上海和平飯店","latitude":31.2390388,"longitude":121.4869678,"cityId":2,"cityName":"上海","detailAddress":"中國上海市黄浦区外滩南京东路20号 邮政编码: 200002"},"arriveLocationList":[{"name":"上海站","latitude":31.24967045,"longitude":121.45561058,"cityId":2,"cityName":"上海","detailAddress":"静安区 秣陵路303号"}]}],"addServiceList":[],"extJson":"{\"remark\":\"推荐游玩行程 \\u003cbr/\\u003e北京周边包车两日游 (方案1)\\u003cbr/\\u003e1: 北京出发 司机按照预约时间到达约定地点，接您出发\\u003cbr/\\u003e2: 前往古北水镇 行驶约150公里2.5小时，到达古北水镇\\u003cbr/\\u003e3: 入住古北水镇 游览古北水镇，欣赏水镇夜景，入住酒店以便第二天行程\\u003cbr/\\u003e玩法二 (方案2)\\u003cbr/\\u003e1: 宽窄箱子 行驶约14公里2小时，建议游玩3小时\\u003cbr/\\u003e推荐美食 \\u003cbr/\\u003e (方案1)\\u003cbr/\\u003e1: 一品火锅 最好的火锅，没有之一\\u003cbr/\\u003e\"}"}
-    urlstr = 'https://60pfokvaff.execute-api.us-east-2.amazonaws.com/dev/day/createorder/3.0/{}/{}'
+    urlstr = 'https://93praqg7h9.execute-api.ap-east-1.amazonaws.com/dev/day/createOrder/3.0/{}/{}'
     env = 'dev'
     print(ctrip_day_request(data,urlstr,env))
