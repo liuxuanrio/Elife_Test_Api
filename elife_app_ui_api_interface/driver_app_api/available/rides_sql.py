@@ -19,7 +19,7 @@ class RidesSql:
                       f"to_time_str = (SELECT date_format(DATE_ADD(NOW(), INTERVAL '{strList[i]}' MINUTE), '%Y-%m-%d %H:%i')" \
                       f" FROM DUAL)  where id = {rideList[i]};"
 
-                sql1 = "update ride.dispatch set to_utc = (select unix_timestamp" \
+                sql1 = "update ride.dispatch set from_utc = (select unix_timestamp" \
                        f"((SELECT date_format(DATE_ADD(NOW(), INTERVAL '{utcList[i]}' MINUTE), '%Y-%m-%d %H:%i')" \
                        f" FROM DUAL))) where ride_id ='{rideList[i]}' and id = '45011';"
             else:
