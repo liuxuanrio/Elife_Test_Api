@@ -34,6 +34,7 @@ def available_Accept():
         ret = returndata(1, ret)
     except:
         ret = returndata(2, "")  # 打印报错信息
+        TimeMethod().logstimeinfo(str(traceback.print_exc()))
     TimeMethod().logstimeinfo(ret)
     return json.dumps(ret, ensure_ascii=False)
 
@@ -54,6 +55,7 @@ def gmailroute():
             ret = returndata(1, ret)
         except:
             ret = returndata(2, "")  # 打印报错信息
+            TimeMethod().logstimeinfo(str(traceback.print_exc()))
     TimeMethod().logstimeinfo(ret)
     return json.dumps(ret, ensure_ascii=False)
 
@@ -66,8 +68,8 @@ def ctriproute():
         ret = ctrip_request(msginfo["body"], msginfo["urlstr"],msginfo["env"])
         ret = returndata(1, ret)
     except:
-        ret = returndata(2, str(traceback.print_exc()))  # 打印报错信息
-
+        ret = returndata(2, "")  # 打印报错信息
+        TimeMethod().logstimeinfo(str(traceback.print_exc()))
     TimeMethod().logstimeinfo(ret)
     return json.dumps(ret, ensure_ascii=False)
 
@@ -80,7 +82,8 @@ def ctripday():
         ret = ctrip_day_request(msginfo["body"], msginfo["urlstr"],msginfo["env"])
         ret = returndata(1, ret)
     except:
-        ret = returndata(2, str(traceback.print_exc()))  # 打印报错信息
+        ret = returndata(2, "")  # 打印报错信息
+        TimeMethod().logstimeinfo(str(traceback.print_exc()))
     TimeMethod().logstimeinfo(ret)
     return json.dumps(ret, ensure_ascii=False)
 
