@@ -21,11 +21,11 @@ class RidesSql:
             if i == 3:
                 sql1 = "update ride.dispatch set from_utc = (select unix_timestamp" \
                        f"((SELECT date_format(DATE_ADD(NOW(), INTERVAL '{utcList[i]}' MINUTE), '%Y-%m-%d %H:%i')" \
-                       f" FROM DUAL))) where ride_id ='{rideList}' and id = '45011';"
+                       f" FROM DUAL))) where ride_id ='{rideList[i]}' and id = '45011';"
             else:
                 sql1 = "update ride.dispatch set from_utc = (select unix_timestamp" \
                        f"((SELECT date_format(DATE_ADD(NOW(), INTERVAL '{utcList[i]}' MINUTE), '%Y-%m-%d %H:%i')" \
-                       f" FROM DUAL))) where ride_id ='{rideList}'"
+                       f" FROM DUAL))) where ride_id ='{rideList[i]}'"
             MYSQL_starter_test().ExecNonQuery(sql1)
 
         sqlList = [["update ride.dispatch set stat = '134217736', fleet_driver_id = null, meeting_place_id=null, "
@@ -39,8 +39,6 @@ class RidesSql:
                     "(select id from ride.dispatch where to_fleet_id in ('11466','11468'));"],
                    ["delete from ride.note_dispatch where dispatch_id in (select id from "
                     "ride.dispatch where to_fleet_id in ('11466','11468'));"],
-                   ["update ride.auction_ride set trip_no_x = 0 where auction_id in (select auction_id from "
-                    "ride.auction_fleet where fleet_id = '11466' and auction_id != '3814');"],
                    ["update ride.auction_ride set trip_no_x = 1 where auction_id in (select auction_id from "
                     "ride.auction_fleet where fleet_id = '11466' and auction_id = '3814');"],
                    ["update ride.auction_fleet set amount = '66.66' where auction_id = '3813' and id = '155';"]]
