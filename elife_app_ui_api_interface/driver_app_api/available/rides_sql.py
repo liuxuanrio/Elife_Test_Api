@@ -13,19 +13,25 @@ class RidesSql:
         strList = [960, 1080, 1920, 2040]
         utcList = [480, 600, 1440, 1560]
         for i in range(len(rideList)):
-            sql = "update ride.ride set from_utc = (select unix_timestamp(" \
-                  f"(SELECT date_format(DATE_ADD(NOW(), INTERVAL '{utcList[i]}' MINUTE), '%Y-%m-%d %H:%i') FROM DUAL))), " \
-                  f"from_time_str = (SELECT date_format(DATE_ADD(NOW(), INTERVAL '{strList[i]}' MINUTE), '%Y-%m-%d %H:%i')" \
-                  f" FROM DUAL)  where id = {rideList[i]};"
-            MYSQL_starter_test().ExecNonQuery(sql)
             if i == 3:
-                sql1 = "update ride.dispatch set from_utc = (select unix_timestamp" \
+                sql = "update ride.ride set to_utc = (select unix_timestamp(" \
+                      f"(SELECT date_format(DATE_ADD(NOW(), INTERVAL '{utcList[i]}' MINUTE), '%Y-%m-%d %H:%i') FROM DUAL))), " \
+                      f"to_time_str = (SELECT date_format(DATE_ADD(NOW(), INTERVAL '{strList[i]}' MINUTE), '%Y-%m-%d %H:%i')" \
+                      f" FROM DUAL)  where id = {rideList[i]};"
+
+                sql1 = "update ride.dispatch set to_utc = (select unix_timestamp" \
                        f"((SELECT date_format(DATE_ADD(NOW(), INTERVAL '{utcList[i]}' MINUTE), '%Y-%m-%d %H:%i')" \
                        f" FROM DUAL))) where ride_id ='{rideList[i]}' and id = '45011';"
             else:
+                sql = "update ride.ride set from_utc = (select unix_timestamp(" \
+                      f"(SELECT date_format(DATE_ADD(NOW(), INTERVAL '{utcList[i]}' MINUTE), '%Y-%m-%d %H:%i') FROM DUAL))), " \
+                      f"from_time_str = (SELECT date_format(DATE_ADD(NOW(), INTERVAL '{strList[i]}' MINUTE), '%Y-%m-%d %H:%i')" \
+                      f" FROM DUAL)  where id = {rideList[i]};"
+
                 sql1 = "update ride.dispatch set from_utc = (select unix_timestamp" \
                        f"((SELECT date_format(DATE_ADD(NOW(), INTERVAL '{utcList[i]}' MINUTE), '%Y-%m-%d %H:%i')" \
                        f" FROM DUAL))) where ride_id ='{rideList[i]}'"
+            MYSQL_starter_test().ExecNonQuery(sql)
             MYSQL_starter_test().ExecNonQuery(sql1)
 
         sqlList = [["update ride.dispatch set stat = '134217736', fleet_driver_id = null, meeting_place_id=null, "
