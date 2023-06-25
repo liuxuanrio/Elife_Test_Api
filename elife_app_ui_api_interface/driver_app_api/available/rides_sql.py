@@ -28,8 +28,8 @@ class RidesSql:
                        f" FROM DUAL))) where ride_id ='{rideList}'"
             MYSQL_starter_test().ExecNonQuery(sql1)
 
-        sqlList = [["update ride.dispatch set stat = '134217729', fleet_driver_id = null, meeting_place_id=null, "
-                    "reversal=null,trip_no_x=trip_no where to_fleet_id in ('11466','11468');"],
+        sqlList = [["update ride.dispatch set stat = '134217736', fleet_driver_id = null, meeting_place_id=null, "
+                    "reversal=null,trip_no_x=null where to_fleet_id in ('11466','11468') and ride_id in (116214,116216,116215,116216);"],
                    ["update ride.ride set dispatch_fleet_id = null where dispatch_fleet_id in ('11466','11468');"],
                    ["delete from ride.auction_bid where auction_id in (select auction_id from "
                     "ride.auction_fleet where fleet_id in ('11466','11468'));"],
