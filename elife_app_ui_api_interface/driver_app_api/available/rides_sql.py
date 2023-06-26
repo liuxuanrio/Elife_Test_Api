@@ -45,6 +45,8 @@ class RidesSql:
                     "(select id from ride.dispatch where to_fleet_id in ('11466','11468'));"],
                    ["delete from ride.note_dispatch where dispatch_id in (select id from "
                     "ride.dispatch where to_fleet_id in ('11466','11468'));"],
+                   ["update ride.auction_ride set trip_no_x = 0 where auction_id in (select auction_id from "
+                    "ride.auction_fleet where auction_id in (3811,3812,3813));"],
                    ["update ride.auction_ride set trip_no_x = 1 where auction_id in (select auction_id from "
                     "ride.auction_fleet where fleet_id = '11466' and auction_id = '3814');"],
                    ["update ride.auction_fleet set amount = '66.66' where auction_id = '3813' and id = '155';"]]
