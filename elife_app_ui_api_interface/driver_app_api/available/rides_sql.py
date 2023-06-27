@@ -74,12 +74,12 @@ class RidesSql:
         获取数据库中抢单时间
         计算当前时间到抢单时间差值，并做等待
         """
-        data = ""
         idList = ["3812", "3814"]
         sql = f"select start_time_str from ride.auction where id = {idList[idType]}"
         strTime = MYSQL_starter_test().ExecQuery(sql)[0][0]
         times = TimeMethod().nowtimedaydatetime()
         timeValue = TimeMethod().countTime(f"{strTime}:00", times)
+        data = f"等待时间:{timeValue}S"
         if timeValue > 0:
             if timeValue > 60 and timeValue < 240:
                 sumtime = timeValue
