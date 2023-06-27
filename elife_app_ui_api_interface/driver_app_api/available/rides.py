@@ -20,11 +20,11 @@ class Rides:
         elif uptype == 1:
             RidesSql().updateAcceptTime()
         elif uptype == 2:
-            RidesSql().updateCountTime(0)
+            data = RidesSql().updateCountTime(0)
         elif uptype == 3:
             RidesSql().updateAmount()
         elif uptype == 4:
-            RidesSql().updateCountTime(1)
+            data = RidesSql().updateCountTime(1)
         elif uptype == 5:
             data = self.fleetAccept()
         else:
