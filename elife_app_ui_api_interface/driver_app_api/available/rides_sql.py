@@ -1,3 +1,4 @@
+from elife_app_ui_api_interface.driver_app_api.sql_template.ride_sql_template import RideSqlTemplate
 from elife_public_method.module_encapsulation.pymysql_method import MYSQL_starter_test
 from elife_public_method.module_encapsulation.times_method import TimeMethod
 
@@ -107,7 +108,23 @@ class RidesSql:
         sql = "update ride.auction_fleet set amount = '120' where auction_id = '3813' and id = '155';"
         MYSQL_starter_test().ExecNonQuery(sql)
 
+    def updateRideStat(self, ride):
+        """
+        1、修改订单状态为Accepted
+        2、删除on show 记录
+        3、删除on show 记录
+        4、修改ride订单时间为当前时间8小时后
+        5、修改dispatch订单时间为当前时间8小时后
+        """
+        sqlList = [f"update ride.dispatch set stat = '134217730',trip_no_x = trip_no where "
+                   f"ride_id = '{ride}' and trip_no >= 0;",
+                   f"delete from ride.complaint where ride_id = '{ride}'",
+                   f"delete from ride.note_ride where ride_id ='{ride}' and note_type = 136118281;",
+                   RideSqlTemplate().upRideTime(480, 960, ride),
+                   RideSqlTemplate().upDispatchTime(480, ride)]
+        for sql in sqlList:
+            MYSQL_starter_test().ExecNonQuery(sql)
 
 if __name__ == "__main__":
     pass
-    print(RidesSql().initialize_ride())
+    print(RidesSql().updateRideStat(133797))

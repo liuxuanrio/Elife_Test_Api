@@ -38,6 +38,19 @@ def available_Accept():
     TimeMethod().logstimeinfo(ret)
     return json.dumps(ret, ensure_ascii=False)
 
+@api.route('/auto/AppUI/Booked/Ride', methods=['post'])
+def booked_Ride():
+    keylist = ["upType", "ride"]
+    msginfo = tokenpublic(keylist)
+    try:
+        ret = Rides().booked_Ride(msginfo["upType"], msginfo["ride"])
+        ret = returndata(1, ret)
+    except:
+        ret = returndata(2, "")  # 打印报错信息
+        TimeMethod().logstimeinfo(str(traceback.print_exc()))
+    TimeMethod().logstimeinfo(ret)
+    return json.dumps(ret, ensure_ascii=False)
+
 
 @api.route('/auto/gmail', methods=['GET', 'POST'])  # 获取gmail邮箱
 def gmailroute():

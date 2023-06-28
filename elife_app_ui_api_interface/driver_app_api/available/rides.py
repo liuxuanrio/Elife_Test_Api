@@ -32,6 +32,9 @@ class Rides:
         return data
 
     def fleetAccept(self):
+        """
+        fleet 接口抢单
+        """
         url = "https://b48pd87r0e.execute-api.us-east-2.amazonaws.com/dev/auctions/id/bids-ride?auction_id=3811&" \
               "ses=LcfppqurqpIxHeTNIXnvZjbsh8lSNePK8loVRm86ePLYkrHYMXJDsPzVTmCL72yz4vyvFN6VhfOzxaqtasZrx1BmRt5X" \
               "KyqQCWc4Ace3Zp4k8P5H23gKwKRIT1MZSYHi"
@@ -44,6 +47,19 @@ class Rides:
                 "req_id": "31e0835e-f8e6-4fe6-a291-bd308e9e07e7"}
         ret = requests_type("post", head, url, data)
         return ret
+
+    def booked_Ride(self, uptype, ride):
+        """
+        初始化订单数据，修改订单状态为accepted
+        uptype: 0 初始化订单数据（修改订单状态到booked list）
+        """
+        datalist = ["初始化订单数据"]
+        data = datalist[uptype]
+        if uptype == 0:
+            RidesSql().updateRideStat(ride)
+        else:
+            data = "False"
+        return data
 
 
 if __name__ == "__main__":
