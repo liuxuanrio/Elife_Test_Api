@@ -6,6 +6,7 @@ from flask import request, Flask, render_template, send_from_directory, make_res
 
 from elife_api_interface.auto_test_api.gmail import Gmail
 from elife_api_interface.ctrip_test_api.getsign import ctrip_request
+from elife_app_ui_api_interface.driver_app_api.account.account import LoginFleet
 from elife_app_ui_api_interface.driver_app_api.available.rides import Rides
 from elife_public_method.module_encapsulation.parameter_method import returndata
 from elife_api_interface.ctrip_test_api.ctripday import ctrip_day_request
@@ -23,6 +24,20 @@ def tokenpublic(keylist):
     ren["reqMsg"] = json.loads(request.get_data())
     ren["post"] = request.url
     return ren
+
+
+@api.route('/auto/AppUI/login/fleet', methods=['post'])
+def login_Fleet():
+    keylist = ["state"]
+    msginfo = tokenpublic(keylist)
+    try:
+        ret = LoginFleet().fleetScript(msginfo["state"])
+        ret = returndata(1, ret)
+    except:
+        ret = returndata(2, "")  # 打印报错信息
+        TimeMethod().logstimeinfo(str(traceback.print_exc()))
+    TimeMethod().logstimeinfo(ret)
+    return json.dumps(ret, ensure_ascii=False)
 
 
 @api.route('/auto/AppUI/Available/Accept', methods=['post'])
