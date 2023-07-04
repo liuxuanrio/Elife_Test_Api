@@ -5,6 +5,7 @@ head = {'content-type': 'application/x-www-form-urlencoded; charset=UTF-8',
         "Content-Length": "72"}
 
 
+
 class LoginFleet:
     def flt_up_unverified(self, name, email, phone, airports):
         url = "https://tkduvoscb4.execute-api.us-east-2.amazonaws.com/dev/fleets-unverified"
@@ -37,8 +38,8 @@ class LoginFleet:
         if state == "BSH":
             day = day[3:]
         phone = f"+{template[state][0]}{day}"
-        name = f"rio{day}"
-        email = f"rio{day}@qq.com"
+        name = f"{state}{day}"
+        email = f"{state}{day}@qq.com"
         airports = template[state][1]
         data = self.flt_up_unverified(name, email, phone, airports)
         data["email"] = email
