@@ -125,6 +125,12 @@ class RidesSql:
         for sql in sqlList:
             MYSQL_starter_test().ExecNonQuery(sql)
 
+    def upRidestate(self, ride):
+        """
+        修改订单到Available list
+        """
+        sqlist = []
+
 if __name__ == "__main__":
     pass
     print(RidesSql().updateRideStat(133797))
