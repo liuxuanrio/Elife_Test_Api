@@ -101,8 +101,8 @@ def ctrip_request(data,urlstr,env):
         print(timeStamp)
         response = requests.post(url, data=enData)
         print(response.status_code)
-        print(response.json())
-        dataJson = response.json()
+        print(response.text)
+        dataJson = response.text
     except:
         import traceback
         dataJson = str(traceback.print_exc())
@@ -117,3 +117,8 @@ if __name__ == '__main__':
     urlstr = 'https://93praqg7h9.execute-api.ap-east-1.amazonaws.com/dev/JNT/ordercreate/2.0/{}/{}'
     print(ctrip_request(data,urlstr,env))
 
+    # ctrip回调
+    # data = {"ctripPurchaseOrderID": 115130813161209892, "vendorOrderID": "2682183", "connectTel": "8008144204", "connectTelCode": "001"}
+    # env = 'prod'
+    # urlstr = 'http://openapi.car.ctrip.com/chvendormessagebus/JNT-1000777/order/confirm/2.0/115130813161209892/{}/{}'
+    # print(ctrip_request(data,urlstr,env))
