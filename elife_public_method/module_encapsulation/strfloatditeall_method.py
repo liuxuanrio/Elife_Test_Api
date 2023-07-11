@@ -63,5 +63,10 @@ class BasicsOperation:
         urldata = parse.quote(data)
         return urldata
 
+    # 对比两个list返回差值
+    def setListDiff(self, list1, list2):
+        list3 = list(set(list1) ^ set(list2))
+        return list3
+
 if __name__ == "__main__":
     flo = 0.5
